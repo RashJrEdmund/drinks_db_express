@@ -1,19 +1,19 @@
 // const Connection = require("mysql2/typings/mysql/lib/Connection");
 const connection = require("./index");
 
-const groupUsersDrinks = (rows) => {
-  const users = {};
-  const ids = new Set();
-  rows.forEach(({id, name, ...drink}) => {
-    if(users[id]) {
-      users[id].drinks.push(drink);
-    } else {
-      users[id] = { id, name, drinks: [drink] };
-    }
-    ids.add(id);
-  });
-  return Array.from(ids).map(id => users[id]);
-}
+// const groupUsersDrinks = (rows) => {
+//   const users = {};
+//   const ids = new Set();
+//   rows.forEach(({id, name, ...drink}) => {
+//     if(users[id]) {
+//       users[id].drinks.push(drink);
+//     } else {
+//       users[id] = { id, name, drinks: [drink] };
+//     }
+//     ids.add(id);
+//   });
+//   return Array.from(ids).map(id => users[id]);
+// }
 
 // async function getAllUsers() {
 //   const [result] = await connection.query(

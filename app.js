@@ -19,6 +19,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// this is a simulation of api keys stored in some database
+
+const API_KEYS = ["1", "2", "3", "4", "5"];
+
+// this is a middle-ware that make sures u have an api key. read middle wares
+
+app.use(function (req, res, next) {
+  const {apikey}  = req.query;
+  const key = req.get("x-api-key");
+  if(API_KEYS.includes(apikey) || API_KEYS.includes(key)) { // the second option is to check the x-api-key value on postman header section
+    next(); // this calls the next function to be ran
+  } else {
+    res.send("acces denied").statusCode(403); // this like the res.status(403) error codes
+  }
+});
+
+// middle ware ends here
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
